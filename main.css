@@ -88,9 +88,35 @@ div.tab button.active {
 
 .source-checkbox {
     text-indent:  30px;
+    font-size:  15px;
 }
-.source-title {
-    margin-left:  20px;
-    font-size: 20px;
+.sourcetitle {
+    margin-left:  10px;
+    font-size: 15px;
+    vertical-align: middle;
 }
 
+label input {
+  display: none;     /* <-- hide the default checkbox */
+}
+
+label span {       /* <-- style the artificial checkbox */
+  height: 15px;
+  width: 15px;
+  border: 1px solid grey;
+  display: inline-block;
+  position: relative;
+}
+
+[type=checkbox]:checked + span::before {  /* <-- style its checked state..with a ticked icon */
+  content: '\2714';
+  position: absolute;
+  top: 0;  /* was -5px  */
+  left: 0;
+  color: #00cc00;
+}
+
+ul {
+    column-count: 3;
+    column-gap: 15px;
+}

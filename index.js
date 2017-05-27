@@ -48,15 +48,22 @@ function returnSources(data) {
     //  by the periodicals in that category
     var text = '';
     var catHeader = '';
+    text = '<ul>';
     for (i = 0; i < sources.length; i++) {
         if (catHeader != sources[i].category) {
             text = text + '<h3 class="heading">' + sources[i].category + '</h3>';
             catHeader = sources[i].category;
         }
         // text = text + '<p class="source-title">' + sources[i].name + '</p>';
-        text = text + '<div class="source-checkbox"><input type="checkbox" name="' +
-            sources[i].id + '"><label class="source-title">' + sources[i].name + '</label></div>';
+
+        // text = text + '<div class="source-checkbox"><input type="checkbox" name="' +
+        //     sources[i].id + '"><label class="source-title">' + sources[i].name + '</label></div>';
+
+        text = text + '<div><label><input type="checkbox" name="' + sources[i].id +
+            '"><span></span><a class="sourcetitle">' + sources[i].name + '</a></div>';
+
     }
+    text = text + '</ul>'
     $('#periodicals').html(text);
 }
 
