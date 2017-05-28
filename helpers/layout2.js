@@ -62,8 +62,8 @@ function displayCard(x) {
 
     // console.log("article title: " + x + " " + articles[x].title);
 
-    $('span.periodicalName').text(currentPeriodical);
-    $('span.js-count').text((x + 1) + " of " + articles.length);
+    $('p.periodicalName').text(currentPeriodical);
+    $('p.js-count').text((x + 1) + " of " + articles.length);
     $('p.dateString').text(dateSpan(articles[x].publishedAt));
     $('p.articleTitle').text(articles[x].title);
     $('p.articleAuthor').text("Author(s): " + articles[x].author);
@@ -91,9 +91,9 @@ function dateSpan(pubDate) {
         text = days + " days, ";
     }
     if (hours == 1) {
-        text = text + hours + " hour";
+        text = text + hours + " hour ago";
     } else if (hours > 1) {
-        text = text + hours + " hours";
+        text = text + hours + " hours ago";
     }
 
     return text;

@@ -9,6 +9,10 @@ html [type=button] {
     -webkit-appearance: none;
 }
 
+html {
+    -webkit-appearance: none;
+}
+
 .centerit {
     text-align: center;
 }
@@ -23,16 +27,30 @@ html [type=button] {
 }
 
 .articleURLImage {
-    width: 320px;
-    height: 180px;
-    border: 1px solid white;
+    width: 400px;
+    height: 280px;
+    border: 1px solid black;
     display: block;
     margin: auto;
 }
 
 .articleTitle {
     font-style: italic;
-    color: bold;
+    font-size: 18px;
+    color: gold;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.articleDesc {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.articleAuthor {
+	margin-bottom: 30px;
+	margin-left:  50px;
+	margin-right:  50px;
 }
 
 .pick-button:hover {
@@ -67,15 +85,16 @@ html [type=button] {
 }
 
 .periodicalName {
-    text-align: left;
+	margin-bottom:  5px;
+    /* text-align: left; */
 }
 
 .js-count {
-		display:  inline-block;
-    text-align: right;
+    /* text-align: left; */
 }
 
 .dateString {
-    display: block;
-    text-align: left;
+	margin-top: 5px;
+	font-size:  small;
+    /* text-align: left; */
 }
