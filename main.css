@@ -84,6 +84,7 @@ div.tab button.active {
 
 .heading {
     color:  yellow;
+    font-variant:  small-caps;
 }
 
 .source-checkbox {

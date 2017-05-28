@@ -1,6 +1,9 @@
-var SOURCES_BASE_URL = "https://newsapi.org/v1/sources";
-var ARTICLES_BASE_URL = " https://newsapi.org/v1/articles";
-
+var SOURCES_URL = "https://newsapi.org/v1/sources";
+var ARTICLES_URL = "https://newsapi.org/v1/articles";
+var API_KEY = "b54b01d96a8b4fac8b2e60a8211e8c2c";
+var sources = [];  // state for the source periodicals
+var articles = []; // state for all the articles in the sources selected by user
+var currentPeriodicalTitle = '';
 
 
 function openTab(evt, tabName) {
@@ -24,16 +27,26 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+function locationInSources(id) {
+    for (var i = 0; i < sources.length; i++) {
+        if (sources[i].sourceId == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 function returnSources(data) {
 
     //  save the returned periodicals 
-    var sources = [];
+    // var sources = [];
     for (var i = 0; i < data.sources.length; i++) {
         sources[i] = {
             category: data.sources[i].category,
             name: data.sources[i].name,
             sourceId: data.sources[i].id,
-            url: data.sources[i].url
+            url: data.sources[i].url,
+            clicked: false
         };
     };
 
@@ -51,7 +64,7 @@ function returnSources(data) {
     text = '<ul>';
     for (i = 0; i < sources.length; i++) {
         if (catHeader != sources[i].category) {
-            text = text + '<h3 class="heading">' + sources[i].category + '</h3>';
+            text = text + '<h4 class="heading">' + sources[i].category + '</h4>';
             catHeader = sources[i].category;
         }
         // text = text + '<p class="source-title">' + sources[i].name + '</p>';
@@ -59,24 +72,89 @@ function returnSources(data) {
         // text = text + '<div class="source-checkbox"><input type="checkbox" name="' +
         //     sources[i].id + '"><label class="source-title">' + sources[i].name + '</label></div>';
 
-        text = text + '<div><label><input type="checkbox" name="' + sources[i].id +
-            '"><span></span><a class="sourcetitle">' + sources[i].name + '</a></div>';
+        // text = text + '<div class="js-source-checkbox"><input type="checkbox" name="' + sources[i].sourceId +
+        //     '"><label><span></span><a class="sourcetitle">' + sources[i].name + '</a></label></div>';
+
+        text = text + '<div class="js-source-checkbox"><input type="checkbox" name="' + sources[i].sourceId +
+            '" class="magId"><label><span></span><a class="sourcetitle">' + sources[i].name + '</a></label></div>';
 
     }
     text = text + '</ul>'
     $('#periodicals').html(text);
 }
 
+function returnArticles(data) {
+    var text;
+
+    //  update the articles in the articles state array
+    for (var j = 0; j < data.articles.length; j++) {
+        articles.push(data.articles[j]);
+    }
+    console.log("just added articles, length now " + articles.length);
+    //  now display the new articles 
+
+    // temp - print out the article list for layout development
+    text = "currentPeriodical = " + currentPeriodicalTitle;
+    console.log(text);
+    for (j=0; j < articles.length; j++) {
+        text = 'articles[' + j + '].author = ' + articles[j].author;
+        console.log(text);
+        text = 'articles[' + j + '].description = ' + articles[j].description;
+        console.log(text);
+        text = 'articles[' + j + '].publishedAt = ' + articles[j].publishedAT;
+        console.log(text);
+        text = 'articles[' + j + '].title = ' + articles[j].title;
+        console.log(text);
+        text = 'articles[' + j + '].url = ' + articles[j].url;
+        console.log(text);
+        text = 'articles[' + j + '].urlToImage = ' + articles[j].urlToImage;
+        console.log(text);
+    }
+}
+
+
+
 $(function() {
     'use strict';
+    // var sourceArray = [];
 
     // Get the element with id="defaultOpen" and click on it
+    // On the page, set the default tab to Sources
     document.getElementById("defaultOpen").click();
 
     //  get the sources/periodicals and render the page
     var parms = {
-        language: "en"  // English language sources only
+        language: "en" // English language sources only
     }
-    $.getJSON(SOURCES_BASE_URL, parms, returnSources);
+    $.getJSON(SOURCES_URL, parms, returnSources);
+    console.log("sources page rendered");
+
+    //  event handler for clicking checkbox of source/periodical
+    $('#periodicals').on('click', '.magId', function(event) {
+        // event.preventDefault();
+        console.log("event handler for source checkbox clicked");
+        console.log("sourceId: " + this.name);
+        var x = locationInSources(this.name);
+        console.log("x " + x);
+        console.log("name: " + sources[x].name + " " + sources[x].category);
+        //
+        //  check for either click-on or click-off
+        //
+        if (sources[x].clicked) {
+            // source clicked off after previously been on, so remove articles
+            console.log("was already clicked on, now off");
+        } else {
+            //  this source just clicked on so find the articles associated
+            //  with this source
+            currentPeriodicalTitle = sources[x].name;
+            sources[x].clicked = true;
+            parms = {
+                source: sources[x].sourceId,
+                apiKey: API_KEY
+            }
+            $.getJSON(ARTICLES_URL, parms, returnArticles);
+        }
+
+    });
 
 })

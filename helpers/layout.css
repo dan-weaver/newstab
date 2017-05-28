@@ -1,0 +1,67 @@
+body {
+    font-family: Roboto;
+    background-color: #333;
+    /* dark gray */
+    color: white;
+}
+
+html [type=button] {
+	-webkit-appearance: none;
+}
+
+
+.centerit {
+    text-align: center;
+}
+
+.clearit {
+    margin-top: 20px;
+    clear: left;
+}
+
+.hidden {
+    display: none;
+}
+
+.articleURLImage {
+    width: 320px;
+    height: 180px;
+    border: 1px solid white;
+    display: block;
+    margin: auto;
+}
+
+.articleTitle {
+    font-style: italic;
+}
+
+.pick-button:hover {
+    cursor: pointer;
+    background-color: purple;
+    color: black;
+}
+
+.button-container {
+	display:  block;
+	margin-top: 20px;
+}
+
+.pick-button {
+    color: black;
+    background-color: gold;
+    border: 1px solid black;
+    text-decoration: none;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 25px;
+}
+
+.js-keep {
+    background-color: lightgreen;
+    border: 2px solid green;
+}
+
+.js-discard {
+    background-color: pink;
+    border: 2px solid red;
+}
