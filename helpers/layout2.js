@@ -49,7 +49,7 @@ function populateArticles() {
     }
 
     articles[5] = {
-        author: "Matea Gold, Matea Gold",
+        author: "Matea Gold",
         description: "By June 1, the administration will publicly post waivers given to appointees who have been exempted from aspects of federal ethics rules.",
         publishedAt: "2017-05-27T13:53:00Z",
         title: "White House relents in fight with ethics office over waiver disclosure",
@@ -62,14 +62,15 @@ function displayCard(x) {
 
     // console.log("article title: " + x + " " + articles[x].title);
 
-    $('p.periodicalName').text(currentPeriodical);
-    $('p.js-count').text((x + 1) + " of " + articles.length);
-    $('p.dateString').text(dateSpan(articles[x].publishedAt));
+    $('p.periodicalName').text(currentPeriodical + ' - ' + dateSpan(articles[x].publishedAt));
+    // $('p.js-count').text((x + 1) + " of " + articles.length);
+    // $('p.dateString').text(dateSpan(articles[x].publishedAt));
     $('p.articleTitle').text(articles[x].title);
-    $('p.articleAuthor').text("Author(s): " + articles[x].author);
-    $('p.articleDesc').text(articles[x].description);
-    $('p.articleDate').text("Date: " + articles[x].publishedAt.slice(0, 10));
+    $('p.articleAuthor').text("By " + articles[x].author);
     $('img.articleURLImage').attr('src', articles[x].urlToImage);
+    $('p.articleDesc').text(articles[x].description);
+    // $('p.articleDate').text("Date: " + articles[x].publishedAt.slice(0, 10));
+    // $('img.articleURLImage').attr('src', articles[x].urlToImage);
 
 }
 
@@ -86,14 +87,14 @@ function dateSpan(pubDate) {
     hours = Math.floor(remainder / milliHours);
     // create string with days and hours
     if (days == 1) {
-        text = days + " day, ";
+        text = days + " day";
     } else if (days > 1) {
-        text = days + " days, ";
+        text = days + " days";
     }
     if (hours == 1) {
-        text = text + hours + " hour ago";
+        text = text + ", " + hours + " hour ago";
     } else if (hours > 1) {
-        text = text + hours + " hours ago";
+        text = text + ", " + hours + " hours ago";
     }
 
     return text;

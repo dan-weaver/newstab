@@ -1,7 +1,6 @@
 body {
     font-family: Roboto;
     background-color: #333;
-    /* dark gray */
     color: white;
 }
 
@@ -13,33 +12,44 @@ html {
     -webkit-appearance: none;
 }
 
-.centerit {
-    text-align: center;
-}
-
-.clearit {
-    margin-top: 20px;
-    clear: left;
-}
-
-.hidden {
-    display: none;
+.articleCard {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .articleURLImage {
-    width: 400px;
-    height: 280px;
+    width: 280px;
+    height: 200px;
     border: 1px solid black;
-    display: block;
-    margin: auto;
+    margin-right: 12px;
+    float: left;
+}
+.articleDesc {
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .articleTitle {
-    font-style: italic;
     font-size: 18px;
     color: gold;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.periodicalName {
+    font-size: small;
+    margin-left:  10px;
+    margin-top: 5px;
+    margin-bottom:  5px;
+}
+
+.dateString {
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size:  small;
 }
 
 .articleDesc {
@@ -48,9 +58,11 @@ html {
 }
 
 .articleAuthor {
-	margin-bottom: 30px;
-	margin-left:  50px;
-	margin-right:  50px;
+    margin-top: 5px;
+	margin-bottom: 25px;
+	margin-left:  10px;
+	margin-right:  10px;
+    font-size:  small;
 }
 
 .pick-button:hover {
@@ -60,41 +72,44 @@ html {
 }
 
 .button-container {
-    display: block;
-    margin-top: 20px;
+    margin-top: 45px;
+    clear:  left;
+    padding-top:  40px;
 }
 
-.pick-button {
+.button-left {
+    display: inline-block;
+    text-align: center;
+    padding-right: 0.75em;
+    padding-left: 0.75em;
+    width: 44%;
+    float: right;
     color: black;
-    background-color: gold;
-    border: 1px solid black;
-    text-decoration: none;
-    padding: 10px;
-    margin-top: 30px;
+    background-color: pink;
+    border: 2px solid red;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.button-right {
+    display: inline-block;
+    text-align: center;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    width: 44%;
+    float: left;
+    color: black;
+    background-color: lightgreen;
+    border: 2px solid limegreen;
+    font-weight: bold;
     border-radius: 25px;
 }
 
 .js-keep {
-    background-color: lightgreen;
-    border: 2px solid green;
 }
 
 .js-discard {
-    background-color: pink;
-    border: 2px solid red;
 }
 
-.periodicalName {
-	margin-bottom:  5px;
-    /* text-align: left; */
-}
 
-.js-count {
-    /* text-align: left; */
-}
 
-.dateString {
-	margin-top: 5px;
-	font-size:  small;
-    /* text-align: left; */
-}
