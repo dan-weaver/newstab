@@ -38,50 +38,39 @@ function locationInSources(id) {
 
 function returnSources(data) {
 
-    //  save the returned periodicals 
-    // var sources = [];
+    //  save the returned periodicals into the state array
     for (var i = 0; i < data.sources.length; i++) {
         sources[i] = {
             category: data.sources[i].category,
             name: data.sources[i].name,
             sourceId: data.sources[i].id,
             url: data.sources[i].url,
-            clicked: false
         };
     };
 
-    // sort array by category
+    // sort the periodicals array by category
     sources.sort(function(a, b) {
         if (a.category < b.category) {
             return -1
         } else return 1;
     });
 
-    //  render the periodials, first with a category header followed 
-    //  by the periodicals in that category
+    //  Create the periodicals display. The category heading is first followed by
+    //  the periodicals in that category. 
     var text = '';
     var catHeader = '';
-    text = '<ul>';
     for (i = 0; i < sources.length; i++) {
         if (catHeader != sources[i].category) {
-            text = text + '<h4 class="heading">' + sources[i].category + '</h4>';
+            text = text + '<p class="js-category">' + sources[i].category + '</p>';
             catHeader = sources[i].category;
         }
-        // text = text + '<p class="source-title">' + sources[i].name + '</p>';
-
-        // text = text + '<div class="source-checkbox"><input type="checkbox" name="' +
-        //     sources[i].id + '"><label class="source-title">' + sources[i].name + '</label></div>';
-
-        // text = text + '<div class="js-source-checkbox"><input type="checkbox" name="' + sources[i].sourceId +
-        //     '"><label><span></span><a class="sourcetitle">' + sources[i].name + '</a></label></div>';
-
-        text = text + '<div class="js-source-checkbox"><input type="checkbox" name="' + sources[i].sourceId +
-            '" class="magId"><label><span></span><a class="sourcetitle">' + sources[i].name + '</a></label></div>';
-
+        text = text + '<p class="js-periodical" id="' + sources[i].sourceId + '">' + sources[i].name + '</p>';
     }
-    text = text + '</ul>'
-    $('#periodicals').html(text);
+
+    //  Render the list
+    $('#source-container').html(text);
 }
+
 
 function returnArticles(data) {
     var text;
@@ -116,27 +105,26 @@ function returnArticles(data) {
 
 $(function() {
     'use strict';
-    // var sourceArray = [];
-
-    // Get the element with id="defaultOpen" and click on it
-    // On the page, set the default tab to Sources
-    document.getElementById("defaultOpen").click();
-
-    //  get the sources/periodicals and render the page
+    
+    //  Get the sources/periodicals and display them 
+    //  in a vertical menu
     var parms = {
         language: "en" // English language sources only
     }
     $.getJSON(SOURCES_URL, parms, returnSources);
     console.log("sources page rendered");
 
-    //  event handler for clicking checkbox of source/periodical
-    $('#periodicals').on('click', '.magId', function(event) {
-        // event.preventDefault();
-        console.log("event handler for source checkbox clicked");
+    //  event handler for clicking on a periodical in the
+    //  vertical menu
+    $("#source-container").on('click', '.js-periodical', function(event) {
+        event.preventDefault();
+        // event.stopPropagation()
+        console.log("event handler for a selected periodical");
         console.log("sourceId: " + this.name);
         var x = locationInSources(this.name);
         console.log("x " + x);
         console.log("name: " + sources[x].name + " " + sources[x].category);
+        debugger;
         //
         //  check for either click-on or click-off
         //

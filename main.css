@@ -1,8 +1,9 @@
 body {
     /* padding-top: 20px; */
     font-family: Roboto;
-    background-color: #333;  /* dark gray */
-    color: white;
+    background-color: #333; 
+    /* dark gray */
+    color: black;
 }
 
 .centerit {
@@ -19,8 +20,41 @@ body {
 }
 
 .tablinks {
-    font-size:  12px;
+    font-size: 12px;
 }
+
+.app-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #ffffe6; /* light yellow */
+}
+
+#source-container {
+    width: 20%;
+    height: 1000px;
+    background-color: #f2f2f2;   /* light gray */
+    overflow-y: auto;
+}
+
+.js-category {
+  color: blue;
+  margin-left: 10px;
+  margin-bottom: 8px;
+}
+
+.js-periodical:hover {
+  background-color: #a6a6a6;  /* medium gray */
+  color: red;
+  cursor: pointer;
+}
+
+.js-periodical {
+  margin-left: 20px;
+  margin-right: 5px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 
 /* Style the tab */
 
@@ -69,52 +103,66 @@ div.tab button.active {
 
 .tabcontent {
     -webkit-animation: fadeEffect 1s;
-    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+    animation: fadeEffect 1s;
+    /* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .heading {
-    color:  yellow;
-    font-variant:  small-caps;
+    color: yellow;
+    font-variant: small-caps;
 }
 
 .source-checkbox {
-    text-indent:  30px;
-    font-size:  15px;
+    text-indent: 30px;
+    font-size: 15px;
 }
+
 .sourcetitle {
-    margin-left:  10px;
+    margin-left: 10px;
     font-size: 15px;
     vertical-align: middle;
 }
 
 label input {
-  display: none;     /* <-- hide the default checkbox */
+    display: none;
+    /* <-- hide the default checkbox */
 }
 
-label span {       /* <-- style the artificial checkbox */
-  height: 15px;
-  width: 15px;
-  border: 1px solid grey;
-  display: inline-block;
-  position: relative;
+label span {
+    /* <-- style the artificial checkbox */
+    height: 15px;
+    width: 15px;
+    border: 1px solid grey;
+    display: inline-block;
+    position: relative;
 }
 
-[type=checkbox]:checked + span::before {  /* <-- style its checked state..with a ticked icon */
-  content: '\2714';
-  position: absolute;
-  top: 0;  /* was -5px  */
-  left: 0;
-  color: #00cc00;
+[type=checkbox]:checked + span::before {
+    /* <-- style its checked state..with a ticked icon */
+    content: '\2714';
+    position: absolute;
+    top: 0;
+    /* was -5px  */
+    left: 0;
+    color: #00cc00;
 }
 
 ul {

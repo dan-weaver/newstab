@@ -27,7 +27,7 @@ html {
 }
 .articleDesc {
     margin-left: 50px;
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 .articleTitle {
@@ -50,11 +50,6 @@ html {
     margin-top: 5px;
     margin-left: 10px;
     font-size:  small;
-}
-
-.articleDesc {
-    margin-left: 50px;
-    margin-right: 50px;
 }
 
 .articleAuthor {
