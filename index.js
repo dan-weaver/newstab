@@ -116,7 +116,7 @@ $(function() {
 
     //  event handler for clicking on a periodical in the
     //  vertical menu
-    $("#source-container").on('click', '.js-periodical', function(event) {
+    $(".app-container").on('click', '.js-periodical', function(event) {
         event.preventDefault();
         // event.stopPropagation()
         console.log("event handler for a selected periodical");
