@@ -11,36 +11,25 @@
 </head>
 
 <body>
-    <!-- <div class="tab">
-        <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'periodicals')">
-            <span class="w3-xlarge w3-text-red">&#10102;</span> Choose Periodicals</button>
-        <button class="tablinks" onclick="openTab(event, 'articles')">
-            <span class="w3-xlarge w3-text-red">&#10103;</span> Select Articles</button>
-        <button class="tablinks" onclick="openTab(event, 'readlist')">
-            <span class="w3-xlarge w3-text-red">&#10104;</span> Read!</button>
-    </div> -->
-    <div class="app-container">
-        <div id="source-container">
-            <p class="js-category"></p>
-            <p class="js-periodical"></p>
+    <div class="main-container">
+
+        <div class="header-container">
+            <div class="header-periodicals"><span>Select periodicals</span></div>
+            <div class="header-readinglist"><span>Review articles</span></div>
         </div>
-        <!-- end of source container -->
-        <!-- 
-        <div id="periodicals" class="tabcontent">
-            <h3>Category</h3>
-            <p>periodical/source</p>
-        </div>
-        <div id="articles" class="tabcontent">
-            <h3>Article list</h3>
-            <p>Choose some periodicals and their articles will appear here.</p>
-        </div>
-        <div id="readlist" class="tabcontent">
-            <h3>Reading list</h3>
-            <p>After choosing some periodicals, next select some articles and they will appear here.</p>
-        </div> -->
-    </div>
-    <!-- end of app-container div -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+        <div class="app-container">
+            <div id="source-container">
+                <p class="js-category"></p>
+                <p class="js-periodical"></p>
+            </div>
+        </div>  <!-- end of app-container div -->
+
+    </div> <!-- end of main-container -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" 
+        crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
 
