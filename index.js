@@ -56,7 +56,7 @@ function returnSources(data) {
     });
 
     //  Create the periodicals display. The category heading is first followed by
-    //  the periodicals in that category. 
+    //  the periodicals in that category.
     var text = '';
     var catHeader = '';
     for (i = 0; i < sources.length; i++) {
@@ -64,7 +64,7 @@ function returnSources(data) {
             text = text + '<p class="js-category">' + sources[i].category.toUpperCase() + '</p>';
             catHeader = sources[i].category;
         }
-        text = text + '<p class="js-periodical" id="' + sources[i].sourceId + '">' + sources[i].name + '</p>';
+        text = text + '<p class="js-periodical" data-source-id="' + sources[i].sourceId + '" id="' + sources[i].sourceId + '">' + sources[i].name + '</p>';
     }
 
     //  Render the list
@@ -80,7 +80,7 @@ function returnArticles(data) {
         articles.push(data.articles[j]);
     }
     console.log("just added articles, length now " + articles.length);
-    //  now display the new articles 
+    //  now display the new articles
 
     // temp - print out the article list for layout development
     text = "currentPeriodical = " + currentPeriodicalTitle;
@@ -105,8 +105,8 @@ function returnArticles(data) {
 
 $(function() {
     'use strict';
-    
-    //  Get the sources/periodicals and display them 
+
+    //  Get the sources/periodicals and display them
     //  in a vertical menu
     var parms = {
         language: "en" // English language sources only
@@ -120,8 +120,9 @@ $(function() {
         event.preventDefault();
         // event.stopPropagation()
         console.log("event handler for a selected periodical");
-        console.log("sourceId: " + this.name);
-        var x = locationInSources(this.name);
+        console.log("sourceId: " + $(this).data('source-id'));
+        var sourceId = $(this).data('source-id');
+        var x = locationInSources(sourceId);
         console.log("x " + x);
         console.log("name: " + sources[x].name + " " + sources[x].category);
         debugger;
