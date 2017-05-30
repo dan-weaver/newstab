@@ -1,0 +1,154 @@
+body {
+    font-family: Roboto;
+    background-color: #333;
+    color: red;
+}
+
+html [type=button] {
+    -webkit-appearance: none;
+}
+
+html {
+    -webkit-appearance: none;
+}
+
+.articleCard {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.articleURLImage {
+    width: 280px;
+    height: 200px;
+    border: 1px solid black;
+    margin-right: 12px;
+    float: left;
+}
+.articleDesc {
+    margin-left: 50px;
+    margin-right: 10px;
+}
+
+.articleTitle {
+    font-size: 18px;
+    color: gold;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.periodicalName {
+    font-size: small;
+    margin-left:  10px;
+    margin-top: 5px;
+    margin-bottom:  5px;
+}
+
+.dateString {
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size:  small;
+}
+
+.articleAuthor {
+    margin-top: 5px;
+	margin-bottom: 25px;
+	margin-left:  10px;
+	margin-right:  10px;
+    font-size:  small;
+}
+
+.pick-button:hover {
+    cursor: pointer;
+    background-color: purple;
+    color: black;
+}
+
+.button-container {
+    margin-top: 45px;
+    clear:  left;
+    padding-top:  40px;
+}
+
+.button-left {
+    display: inline-block;
+    text-align: center;
+    padding-right: 0.75em;
+    padding-left: 0.75em;
+    width: 44%;
+    float: right;
+    color: black;
+    background-color: pink;
+    border: 2px solid red;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.button-right {
+    display: inline-block;
+    text-align: center;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    width: 44%;
+    float: left;
+    color: black;
+    background-color: lightgreen;
+    border: 2px solid limegreen;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.js-keep {
+}
+
+.js-discard {
+}
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    border:  1px solid black;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+}
+
+.accordion-source {
+	font-size: 14px;
+	padding-top: 2px;
+	float: left;
+}
+
+.accordion-date {
+	font-size:  small;
+	font-style:  italic;
+	margin-left: 10px;
+	clear: left;
+}
+
+.accordion-title {
+	clear: left;
+	color: red;
+	margin: 4px;
+}
+
