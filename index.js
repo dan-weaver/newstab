@@ -61,7 +61,7 @@ function returnSources(data) {
     var catHeader = '';
     for (i = 0; i < sources.length; i++) {
         if (catHeader != sources[i].category) {
-            text = text + '<p class="js-category">' + sources[i].category + '</p>';
+            text = text + '<p class="js-category">' + sources[i].category.toUpperCase() + '</p>';
             catHeader = sources[i].category;
         }
         text = text + '<p class="js-periodical" id="' + sources[i].sourceId + '">' + sources[i].name + '</p>';
