@@ -109,6 +109,9 @@ function renderArticles() {
                 '<img class="panelURLImage" src="' + articles[i].urlToImage + '">' +
                 '<p class="panelDesc">' + articles[i].description + '</p>' +
                 '<p class="panelAuthor">By ' + articles[i].author + '</p>' +
+                '<div class="button-container">' + 
+                '<a class="button-left js-discard" type="button">Discard</a>' +
+                '<a class="button-right js-keep" type="button">Open in browser tab</a></div>' +
                 '</div>';
         }
     }
