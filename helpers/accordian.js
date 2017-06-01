@@ -78,12 +78,14 @@ function dateSpan(pubDate) {
 
     // Normalize publishedAt data and system date in terms of millisecs 
     // since the epoch date of Jan 1, 1970. Calculate the difference.
+
     currentMilliseconds = new Date().getTime(); 
     publishedAtMilliseconds = Date.parse(pubDate);
     var diff = currentMilliseconds - publishedAtMilliseconds;
 
     //  Do divison and calculate the remainder to determine 
     //  number of days and hours
+
     var milliDays = 24 * 60 * 60 * 1000;
     days = Math.floor(diff / milliDays);
     var remainder = diff - (days * milliDays);
@@ -91,6 +93,7 @@ function dateSpan(pubDate) {
     hours = Math.floor(remainder / milliHours);
 
     // create string with days and hours,  e.g., "x days, y hours"
+    
     var text = '';
     if (days == 1) {
         text = days + " day";
