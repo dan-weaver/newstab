@@ -27,6 +27,52 @@ function locationInArticles(title) {
 }
 
 
+function dateSpan(pubDate) {
+
+    if (pubDate == null) {
+        return "not provided";
+    }
+
+    // Normalize publishedAt date and the system date in terms of millisecs 
+    // since the epoch date of Jan 1, 1970. Calculate the difference.
+    var diff = new Date().getTime() - Date.parse(pubDate);
+
+    //  Determine number of days and hours 
+
+    var milliDays = 24 * 60 * 60 * 1000;
+    days = Math.floor(diff / milliDays);
+    var remainder = diff - (days * milliDays);
+    var milliHours = 60 * 60 * 1000;
+    hours = Math.floor(remainder / milliHours);
+
+    // Stringify the date span,  e.g., "x days, y hours"
+
+    var text = '';
+
+    if (days == 0 && hours == 0) {
+        return "within the hour";
+    }
+
+    if (days == 1) {
+        text = days + " day";
+    } else if (days > 1) {
+        text = days + " days";
+    }
+
+    if (days > 0 && hours > 0) {
+        text = text + ", ";
+    }
+
+    if (hours == 1) {
+        text = text + hours + " hour ago";
+    } else if (hours > 1) {
+        text = text + hours + " hours ago";
+    }
+
+    return text;
+}
+
+
 function returnSources(data) {
 
     //  save the returned periodicals into the state array
@@ -84,7 +130,7 @@ function renderArticles() {
     for (i = 0; i < articles.length; i++) {
         if (articles[i].status != 2) { // if article not deleted
             text = text + '<button class="accordion-strip" data-article-id="' + articles[i].title +
-                '"><span class="strip-source">' + articles[i].sourceTitle +
+                '"><span class="strip-source">' + articles[i].sourceTitle + ' - ' + dateSpan(articles[i].publishedAt) +
                 '</span><p class="strip-title">' + articles[i].title + '</p></button>';
             text = text + '<div class="panel';
 
