@@ -62,25 +62,22 @@ function returnSources(data) {
 }
 
 
-function checkForArticleSelected() {
-    // console.log("at event handler at checkForArticleSelected");
-    $('.js-readinglist').on('click', '.accordion-strip', function(event) {
-        event.preventDefault();
-        var x = locationInArticles($(this).data('article-id'));
-        console.log("clicked on article " + x);
-        if (articles[x].status == 0) {
-            articles[x].status = 1; //set to expand
-            console.log("was collapsed, set to expand");
-        } else {
-            articles[x].status = 0; //set to collapse
-            console.log("was expanded, set to collapse");
-        }
+$('.js-readinglist').on('click', '.accordion-strip', function(event) {
+  event.preventDefault();
+  var x = locationInArticles($(this).data('article-id'));
+  console.log("clicked on article " + x);
+  if (articles[x].status == 0) {
+      articles[x].status = 1; //set to expand
+      console.log("was collapsed, set to expand");
+  } else {
+      articles[x].status = 0; //set to collapse
+      console.log("was expanded, set to collapse");
+  }
 
-        // debugger;
-        // $('.panel').toggle('slow');
-        renderArticles();
-    });
-}
+  // debugger;
+  // $('.panel').toggle('slow');
+  renderArticles();
+});
 
 
 function renderArticles() {
@@ -105,11 +102,11 @@ function renderArticles() {
                 text = text + '">';
                 console.log("in loop " + i + " article set to expand");
             }
-            text = text + 
+            text = text +
                 '<img class="panelURLImage" src="' + articles[i].urlToImage + '">' +
                 '<p class="panelDesc">' + articles[i].description + '</p>' +
                 '<p class="panelAuthor">By ' + articles[i].author + '</p>' +
-                '<div class="button-container">' + 
+                '<div class="button-container">' +
                 '<a class="button-left js-discard" type="button">Discard</a>' +
                 '<a class="button-right js-keep" type="button">Open in browser tab</a></div>' +
                 '</div>';
@@ -137,7 +134,6 @@ function returnArticles(data) {
     //  Render the articles page in the accordion strip form
     renderArticles();
     console.log('in returnArticles after renderArticles called. Check for article click here');
-    checkForArticleSelected();
 }
 
 
