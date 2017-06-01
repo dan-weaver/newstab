@@ -195,30 +195,28 @@ body {
 }
 
 .button-left {
-    /* display: inline-block; */
     text-align: center;
     padding-right: 0.75em;
     padding-left: 0.75em;
-    /* width: 44%; */
-    /* float: right; */
     color: black;
     background-color: pink;
     border: 1px solid red;
     font-weight: bold;
     border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .button-right {
-    /* display: inline-block; */
     text-align: center;
     padding-left: 0.75em;
     padding-right: 0.75em;
-    /* width: 44%; */
     float: left;
     color: black;
     background-color: lightblue;
     border: 1px solid limegreen;
     font-weight: bold;
     border-radius: 25px;
+    text-decoration: none;
 }
 
