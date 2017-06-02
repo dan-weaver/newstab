@@ -16,10 +16,10 @@ function locationInSources(id) {
 }
 
 
-function locationInArticles(title) {
+function locationInArticles(targetURL) {
 
     for (var y = 0; y < articles.length; y++) {
-        if (articles[y].title == title) {
+        if (articles[y].url == targetURL) {
             return y;
         }
     }
@@ -129,7 +129,7 @@ function renderArticles() {
 
     for (i = 0; i < articles.length; i++) {
         if (articles[i].status != 2) { // if article not deleted
-            text = text + '<button class="accordion-strip" data-article-id="' + articles[i].title +
+            text = text + '<button class="accordion-strip" data-article-id="' + articles[i].url +
                 '"><span class="strip-source">' + articles[i].sourceTitle + ' - ' + dateSpan(articles[i].publishedAt) +
                 '</span><p class="strip-title">' + articles[i].title + '</p></button>';
             text = text + '<div class="panel';
@@ -144,7 +144,7 @@ function renderArticles() {
                 '<img class="panelURLImage" src="' + articles[i].urlToImage + '">' +
                 '<p class="panelDesc">' + articles[i].description + '</p>' +
                 '<p class="panelAuthor">By ' + articles[i].author + '</p>' +
-                '<div class="button-container" data-button-id="' + articles[i].title + '">' +
+                '<div class="button-container" data-button-id="' + articles[i].url + '">' +
                 '<a class="button-left js-discard" type="button">Discard</a>' +
                 '<a class="button-right js-keep" type="button" href="' + articles[i].url +
                 '" target="_blank">Open in browser tab</a></div>' +
@@ -201,7 +201,7 @@ $(function() {
     });
 
     //  Event handler for clicking on the delete button in the panel.
-    //  Set articles[x].status to 2 so that article no longer displays.
+    //  Set articles[x].status to 2 so the article no longer displays.
 
     $(".js-readinglist").on('click', '.js-discard', function(event) {
         event.preventDefault();
