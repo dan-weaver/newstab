@@ -211,4 +211,24 @@ $(function() {
         renderArticles();
     });
 
+    $('.header-remove-all').on('click', function(event) {
+        event.preventDefault();
+        console.log("remove all clicked");
+        for (var i=0; i < articles.length; i++) {
+            articles[i].status = 2;
+        };
+        renderArticles();
+    });
+
+    $('.header-compact-all').on('click', function(event) {
+        event.preventDefault();
+        console.log("collapse all clicked");
+        for (var i=0; i < articles.length; i++) {
+            if (articles[i].status == 1) {
+                articles[i].status = 0;
+            };
+        };
+        renderArticles();
+    });
+
 });
