@@ -35,6 +35,7 @@ function dateSpan(pubDate) {
 
     // Normalize publishedAt date and the system date in terms of millisecs 
     // since the epoch date of Jan 1, 1970. Calculate the difference.
+    
     var diff = new Date().getTime() - Date.parse(pubDate);
 
     //  Determine number of days and hours 
@@ -75,6 +76,8 @@ function dateSpan(pubDate) {
 
 function returnSources(data) {
 
+    console.log("Top of returnSources");
+
     //  save the returned periodicals into the state array
 
     for (var i = 0; i < data.sources.length; i++) {
@@ -106,69 +109,56 @@ function returnSources(data) {
         }
         text = text + '<p class="js-periodical" data-source-id="' + sources[i].sourceId + '" id="' + sources[i].sourceId + '">' + sources[i].name + '</p>';
     }
-
-    $('#source-container').html(text);
+    console.log("writing to DOM");;
+    $('.nav').html(text);
 }
 
 
-$('.js-readinglist').on('click', '.accordion-strip', function(event) {
-    event.preventDefault();
-    var x = locationInArticles($(this).data('article-id'));
-    if (articles[x].status == 0) {
-        articles[x].status = 1; //set to expand
-    } else {
-        articles[x].status = 0; //set to collapse
-    }
-    renderArticles();
-});
-
-
 function renderArticles() {
+    console.log("at top of renderArticles");
     var i;
     var text = '';
 
     for (i = 0; i < articles.length; i++) {
-        if (articles[i].status != 2) { // if article not deleted
-            text = text + '<button class="accordion-strip" data-article-id="' + articles[i].url +
-                '"><span class="strip-source">' + articles[i].sourceTitle + ' - ' + dateSpan(articles[i].publishedAt) +
-                '</span><p class="strip-title">' + articles[i].title + '</p></button>';
-            text = text + '<div class="panel';
+        if (articles[i].status != 2) {            // if article not marked as deleted
+            text = text + '<article class="article-container"><div class="title-row" ' +
+                'data-article-id="' + articles[i].url + '">' +
+                '<span class="article-source">' + articles[i].sourceTitle + ' - ' + dateSpan(articles[i].publishedAt) +
+                '</span><div class="button-box" data-row-id="' + i + '">' + 
+                '<div class="expand-button"><img src="assets/expand-4.svg" title="Expand/collapse details"></div>' +
+                '<div class="tab-button"><img src="assets/opentab.svg" title="Open browser tab"></div>' +
+                '<div class="delete-button"><img src="assets/trashcan.svg" title="Delete article"></div>' + 
+                '</div></div><p class="article-title">' + articles[i].title + '</p></div>';
 
+            text = text + '<div class="detail';
             if (articles[i].status == 0) {
                 text = text + ' hidden">';
             }
             if (articles[i].status == 1) {
                 text = text + '">';
             }
-            text = text +
-                '<img class="panelURLImage" src="' + articles[i].urlToImage + '">' +
-                '<p class="panelDesc">' + articles[i].description + '</p>' +
-                '<p class="panelAuthor">By ' + articles[i].author + '</p>' +
-                '<div class="button-container" data-button-id="' + articles[i].url + '">' +
-                '<a class="button-left js-discard" type="button">Discard</a>' +
-                '<a class="button-right js-keep" type="button" href="' + articles[i].url +
-                '" target="_blank">Open in browser tab</a></div>' +
-                '</div>';
+            text = text + '<img class="detail-URLImage" src="' + articles[i].urlToImage + '">' +
+                '<p class="detail-author">By ' +  articles[i].author + '</p>' +
+                '<p class="detail-desc">' + articles[i].description + '</p></div></article>';
         }
     }
-    $('.js-readinglist').html(text);
 
+    $('.content').html(text);
 }
 
 
 function returnArticles(data) {
     var j;
 
-    //  add the returned articles to existing articles state array. Note that
-    //  there may be existing articles already in the array
+    //  Add the returned articles to the articles state array. Note that
+    //  there may be existing articles already in the array.
 
     for (j = 0; j < data.articles.length; j++) {
         articles.push(data.articles[j]);
         articles[articles.length - 1].status = 0; // accordion panel: status 0-collapsed, 1-expanded
         articles[articles.length - 1].sourceTitle = currentPeriodicalTitle;
+        console.log("articles returned");
     }
-
-    //  Render the articles page in the accordion strip form
 
     renderArticles();
 }
@@ -176,6 +166,7 @@ function returnArticles(data) {
 
 $(function() {
     'use strict';
+    console.log("start the ball rolling");
 
     //  Get the sources/periodicals and display them
     //  in a vertical menu
@@ -200,35 +191,51 @@ $(function() {
         $.getJSON(ARTICLES_URL, parms, returnArticles);
     });
 
-    //  Event handler for clicking on the delete button in the panel.
-    //  Set articles[x].status to 2 so the article no longer displays.
+    //  Register the event handler for clicking on a periodical in the
+    //  vertical menu. If a periodical is clicked, obtain the articles 
 
-    $(".js-readinglist").on('click', '.js-discard', function(event) {
+    $(".nav").on('click', '.js-periodical', function(event) {
         event.preventDefault();
-        var a = $(this)["0"].parentNode.attributes[1].value;
-        var y = locationInArticles(a);
-        articles[y].status = 2;
-        renderArticles();
-    });
-
-    $('.header-remove-all').on('click', function(event) {
-        event.preventDefault();
-        console.log("remove all clicked");
-        for (var i=0; i < articles.length; i++) {
-            articles[i].status = 2;
+        var sourceId = $(this).data('source-id');
+        var x = locationInSources(sourceId);
+        currentPeriodicalTitle = sources[x].name;
+        console.log("Periodical selected: " + currentPeriodicalTitle);
+        parms = {
+            source: sources[x].sourceId,
+            apiKey: API_KEY
         };
-        renderArticles();
+        $.getJSON(ARTICLES_URL, parms, returnArticles);
     });
 
-    $('.header-compact-all').on('click', function(event) {
+    //  Register event handlers for clicking on an article's button --
+    //  the expand or compress button, open in browser tab button, or delete button.
+
+    $('.content').on('click', '.delete-button', function(event) {
         event.preventDefault();
-        console.log("collapse all clicked");
-        for (var i=0; i < articles.length; i++) {
-            if (articles[i].status == 1) {
-                articles[i].status = 0;
-            };
-        };
+        var x = $(this)["0"].parentNode.attributes[1].value;
+        console.log("delete button for article " + x);
+        articles[x].status = 2;
         renderArticles();
     });
 
-});
+    $('.content').on('click', '.expand-button', function(event) {
+        event.preventDefault();
+        var x = $(this)["0"].parentNode.attributes[1].value;
+        console.log("expand/compress button for " + x);
+        if (articles[x].status == 0) {
+            articles[x].status = 1; //set to expand
+        } else {
+            articles[x].status = 0; //set to collapse
+        }
+        renderArticles();
+    });
+
+    $('.content').on('click', '.tab-button', function(event) {
+        event.preventDefault();
+        var x = $(this)["0"].parentNode.attributes[1].value;
+        console.log("open tab button for article " + x);
+        window.open(articles[x].url,'_blank');
+        // renderArticles();
+    });
+
+})
